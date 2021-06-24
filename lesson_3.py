@@ -5,6 +5,7 @@
 # среднее арифметическое, среднее квадратичное отклонение, смещенную
 # и несмещенную оценки дисперсий для данной выборки.
 from lesson_2_task1_4 import combination
+import pandas as pd
 workers = [100, 80, 75, 77, 89, 33, 45, 25, 65, 17,
            30, 24, 57, 55, 70, 75, 65, 84, 90, 150]
 
@@ -40,12 +41,15 @@ print(f"Среднее квадратичное отклонение (рассч
 # или
 print(f"Среднее квадратичное отклонение (корень из дисперсии) {round(d ** 0.5, 2)}")
 
+# Проверка
+workers = pd.DataFrame(workers)
+print(workers.mean(), workers.std(ddof=0), workers.var(ddof=0), workers.var(ddof=1))
 # В первом ящике находится 8 мячей, из которых 5 - белые.
 # Во втором ящике - 12 мячей, из которых 5 белых.
 # Из первого ящика вытаскивают случайным образом два мяча, из второго - 4.
 # Какова вероятность того, что 3 мяча белые?
 
-p_1 = (combination(5, 2) * combination(3, 0)/ combination(8, 2)) * (combination(5, 1) * combination(7, 3) / combination(12, 4))
-p_2 = (combination(5, 1) * combination(3, 1)/ combination(8, 2)) * (combination(5, 2) * combination(7, 2) / combination(12, 4))
-p_3 = (combination(5, 0) * combination(3, 2)/ combination(8, 2)) * (combination(5, 3) * combination(3, 1) / combination(12, 4))
-print(round(p_1 + p_2 + p_3, 2))
+p_1 = (combination(5, 2) * combination(3, 0) / combination(8, 2)) * (combination(5, 1) * combination(7, 3) / combination(12, 4))
+p_2 = (combination(5, 1) * combination(3, 1) / combination(8, 2)) * (combination(5, 2) * combination(7, 2) / combination(12, 4))
+p_3 = (combination(5, 0) * combination(3, 2) / combination(8, 2)) * (combination(5, 3) * combination(3, 1) / combination(12, 4))
+print(f"Вероятность трех белых мячей {round(p_1 + p_2 + p_3, 2)}")
